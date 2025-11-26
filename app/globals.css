@@ -1,0 +1,212 @@
+@import "tailwindcss";
+/* removed tw-animate-css import as it might be causing the invalid custom property error */
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Light Mode Variables */
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #00e1ff;
+  --primary-foreground: #000000;
+  --secondary: #7c3aed; /* Neon Purple */
+  --secondary-foreground: #fafafa;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #09090b;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #00e1ff;
+  --radius: 0.5rem;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New",
+    monospace;
+  --chart-1: #00e1ff;
+  --chart-2: #7c3aed;
+  --chart-3: #ef4444;
+  --chart-4: #12f7d6;
+  --chart-5: #fbbf24;
+  --sidebar: #f4f4f5;
+  --sidebar-foreground: #09090b;
+  --sidebar-primary: #00e1ff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #e4e4e7;
+  --sidebar-accent-foreground: #09090b;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #00e1ff;
+}
+
+.dark {
+  /* Dark Mode Variables (Original Design) */
+  --background: #050505;
+  --foreground: #fafafa;
+  --card: #0a0a0a;
+  --card-foreground: #fafafa;
+  --popover: #0a0a0a;
+  --popover-foreground: #fafafa;
+  --primary: #00e1ff; /* Neon Cyan */
+  --primary-foreground: #000000;
+  --secondary: #7c3aed; /* Neon Purple */
+  --secondary-foreground: #fafafa;
+  --muted: #171717;
+  --muted-foreground: #a3a3a3;
+  --accent: #171717;
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #262626;
+  --input: #262626;
+  --ring: #00e1ff;
+  --chart-1: #00e1ff;
+  --chart-2: #7c3aed;
+  --chart-3: #ef4444;
+  --chart-4: #12f7d6;
+  --chart-5: #fbbf24;
+  --sidebar: #0a0a0a;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #00e1ff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #171717;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #262626;
+  --sidebar-ring: #00e1ff;
+}
+
+@theme inline {
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(0, 225, 255, 0.3);
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px rgba(0, 225, 255, 0.5);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Preloader neon loader animations */
+@keyframes neon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 225, 255, 0.5), 0 0 40px rgba(0, 225, 255, 0.3);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 30px rgba(0, 225, 255, 0.7), 0 0 60px rgba(0, 225, 255, 0.5);
+  }
+}
+
+.neon-ring {
+  border-radius: 9999px;
+  border: 3px solid #22d3ee;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.6), 0 0 40px rgba(34, 211, 238, 0.4);
+  animation: neon-spin 1.4s linear infinite;
+}
+
+.neon-ring-inner {
+  box-shadow: 0 0 15px rgba(0, 225, 255, 0.4);
+  animation: neon-pulse 1.8s ease-in-out infinite;
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .neon-ring {
+    animation: none;
+  }
+
+  .neon-ring-inner {
+    animation: none;
+  }
+}
+
+/* Route progress bar */
+.route-progress-container {
+  position: relative;
+  z-index: 40;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.route-progress-bar {
+  height: 3px;
+  border-radius: 9999px;
+  /* Match brand-ish gradient */
+  background: linear-gradient(to right, #22d3ee, #22c55e, #a855f7);
+  transition: width 0.2s ease-out;
+}

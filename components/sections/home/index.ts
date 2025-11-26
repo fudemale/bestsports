@@ -1,0 +1,8 @@
+export { HeroSection } from "./hero-section"
+export { FeaturesSection } from "./features-section"
+export { PlansSection } from "./plans-section"
+export { SportsSection } from "./sports-section"
+export { DevicesSection } from "./devices-section"
+export { ReviewsSection } from "./reviews-section"
+export { FaqSection } from "./faq-section"
+export { CallToActionSection } from "./call-to-action-section"
