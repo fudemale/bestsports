@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
@@ -62,6 +63,7 @@ export default function RootLayout({
           <RouteProgressBar />
           <main className="flex-1">{children}</main>
           <SiteFooter />
+          <Script src="//code.tidio.co/6xajtski11ryhjc7712sj3gov2gjgcv8.js" strategy="afterInteractive" />
         </ThemeProvider>
       </body>
     </html>
