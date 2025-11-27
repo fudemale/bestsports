@@ -51,6 +51,19 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans min-h-screen flex flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground`}
       >
+        <Script
+          id="gtag-base"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17762087158"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17762087158');
+          `}
+        </Script>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="bsiptv-theme">
           <SitePreloader />
           {/* Global brand schema */}

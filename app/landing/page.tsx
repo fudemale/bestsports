@@ -1,6 +1,15 @@
+"use client"
+
+import { useEffect } from "react"
 import type { Metadata } from "next"
 import { LandingPageTemplate } from "@/components/sections/landing"
 import { BRAND_NAME, buildCampaignCtaUrl, SITE_URL } from "@/lib/constants"
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void
+  }
+}
 
 const keyword = "Best IPTV Service 2025"
 const slug = "best-iptv-service-2025"
@@ -55,6 +64,14 @@ const faqs = [
 ]
 
 export default function LandingPage() {
+  useEffect(() => {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "conversion", {
+        send_to: "AW-17762087158/OxEsCPqYxccbEPbhz5VC",
+      })
+    }
+  }, [])
+
   return (
     <LandingPageTemplate
       title="Targeted Sports Campaign"
