@@ -488,6 +488,44 @@ export const landingPageContent: Record<string, LandingPageContent> = {
       },
     ],
   },
+  landing: {
+    slug: "landing",
+    path: "/landing",
+    title: "Best IPTV Service 2025 | Best Sports IPTV",
+    description: "Dedicated landing experience for geo and keyword campaigns promoting Best Sports IPTV coverage.",
+    keyword: "Best IPTV Service 2025",
+    benefits: [
+      "Geo-targeted sports playlists ready for SEO landing funnels",
+      "Optimized ad relevance for 2025 sports audiences",
+      "High-converting structure for paid traffic",
+    ],
+    comparisonTable: {
+      columns: ["Feature", "Best Sports IPTV", "Cable TV", "Generic IPTV"],
+      rows: [
+        ["Monthly Cost", "$14.99", "$120+", "$35+"],
+        ["4K Match Streams", "✔✔✔ Yes", "✗ No", "Sometimes"],
+        ["Global Sports Rights", "Worldwide", "Region-Locked", "Partial"],
+        ["Device Support", "TV, Mobile, Web", "Cable Box Only", "Android Only"],
+        ["Support", "24/7 Experts", "Business Hours", "Ticket Only"],
+      ],
+    },
+    faqs: [
+      {
+        question: "Why is Best IPTV Service 2025 better than cable?",
+        answer: "You get every major league, PPV, and replay without overpriced bundles or hardware rentals.",
+      },
+      {
+        question: "How fast is activation?",
+        answer: "Activation is instant—your credentials arrive by email within minutes of checkout.",
+      },
+      {
+        question: "Can I cancel anytime?",
+        answer: "Yes. All Best Sports IPTV plans are contract-free with a 30-day money-back guarantee.",
+      },
+    ],
+    ogImage: "/placeholder.jpg",
+    ctaUrl: buildCampaignCtaUrl("best-iptv-service-2025"),
+  },
 }
 
 export function createLandingMetadata(content: LandingPageContent): Metadata {
