@@ -1,0 +1,12 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#000000"/>
+  <g transform="translate(5, 6)">
+    <!-- TV Screen -->
+    <rect x="2" y="2" width="18" height="12" rx="1.5" stroke="#00e1ff" stroke-width="1.5" fill="none"/>
+    <!-- Screen inner glow -->
+    <rect x="4" y="4" width="14" height="8" rx="0.5" fill="#00e1ff" fill-opacity="0.15"/>
+    <!-- TV Stand -->
+    <line x1="7" y1="16" x2="15" y2="16" stroke="#00e1ff" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>
+
