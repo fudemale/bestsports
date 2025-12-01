@@ -11,6 +11,7 @@ secondaryKeywords:
 searchIntent: "commercial"
 description: "Compare the best IPTV providers for 2025. Detailed reviews of top services including pricing, features, reliability, and sports coverage."
 readingTimeMinutes: 9
+date: "2025-11-01"
 publishedAt: "2025-11-01"
 updatedAt: "2025-11-01"
 author: "Best Sports IPTV"

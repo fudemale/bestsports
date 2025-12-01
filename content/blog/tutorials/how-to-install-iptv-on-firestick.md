@@ -11,6 +11,7 @@ secondaryKeywords:
 searchIntent: "informational"
 description: "Complete guide to installing IPTV apps on Amazon FireStick. Learn how to use Downloader app, enter app codes, and set up VWatch Smart, Pro, or Q apps."
 readingTimeMinutes: 8
+date: "2025-11-01"
 publishedAt: "2025-11-01"
 updatedAt: "2025-11-01"
 author: "Best Sports IPTV"
