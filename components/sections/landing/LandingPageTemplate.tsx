@@ -16,6 +16,7 @@ type LandingPageTemplateProps = {
   ogImage?: string
   ctaUrl: string
   relatedLinks?: RelatedLink[]
+  additionalBodyContent?: string
 }
 
 function renderValue(value: string | boolean): string {
@@ -35,6 +36,7 @@ export function LandingPageTemplate({
   ogImage,
   ctaUrl,
   relatedLinks,
+  additionalBodyContent,
 }: LandingPageTemplateProps) {
   const isNewFormat = "columns" in comparisonTable && "rows" in comparisonTable
   const brandLabel = isNewFormat ? comparisonTable.columns[1] : comparisonTable.brandLabel || "Best Sports IPTV"
@@ -94,6 +96,25 @@ export function LandingPageTemplate({
               compatibility across Smart TV, Android, iOS, and more—so you can enjoy your {keyword.toLowerCase()} at
               home or on the go.
             </p>
+            {additionalBodyContent && (() => {
+              // Parse markdown link [text](url) and render as Next.js Link
+              const linkMatch = additionalBodyContent.match(/\[([^\]]+)\]\(([^)]+)\)/)
+              if (linkMatch) {
+                const [, linkText, linkUrl] = linkMatch
+                const beforeLink = additionalBodyContent.substring(0, linkMatch.index)
+                const afterLink = additionalBodyContent.substring((linkMatch.index || 0) + linkMatch[0].length)
+                return (
+                  <p>
+                    {beforeLink}
+                    <Link href={linkUrl} className="text-primary hover:underline">
+                      {linkText}
+                    </Link>
+                    {afterLink}
+                  </p>
+                )
+              }
+              return <p>{additionalBodyContent}</p>
+            })()}
           </article>
         </div>
       </section>

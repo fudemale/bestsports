@@ -39,6 +39,7 @@ export type LandingPageContent = {
   ogImage?: string
   ctaUrl: string
   relatedLinks?: RelatedLink[]
+  additionalBodyContent?: string
 }
 
 const _competitorLabels = ["Cable TV", "Generic IPTV"]
@@ -429,6 +430,8 @@ export const landingPageContent: Record<string, LandingPageContent> = {
       "Comparative notes on performance at UK peak hours for IPTV UK services.",
       "Updated recommendations based on 2025 testing of best IPTV UK options available.",
     ],
+    additionalBodyContent:
+      'Want the full breakdown? Read our [IPTV UK in 2025: Complete guide for beginners](/blog/guides/iptv-uk-2025-complete-guide-for-beginners) for legal context, device setup tips, and safety checks.',
     comparisonTable: {
       columns: ["UK-Focused Feature", "VWatch (Top Pick)", "VWatch (Provider A)", "BuyTopIPTV (Provider B)"],
       rows: [
