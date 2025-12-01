@@ -2,12 +2,16 @@ import Link from "next/link"
 import { Calendar, User, ArrowRight } from "lucide-react"
 import type { BlogPost } from "@/lib/blog-types"
 import { format } from "date-fns"
+import { safeDate } from "@/lib/utils"
 
 interface BlogCardProps {
   post: BlogPost
 }
 
 export function BlogCard({ post }: BlogCardProps) {
+  const publishedDate = safeDate(post.date)
+  const formattedDate = publishedDate ? format(publishedDate, "MMM d, yyyy") : null
+
   return (
     <Link href={`/blog/${post.category}/${post.slug}`} className="group">
       <article className="glass-card rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all h-full flex flex-col">
@@ -15,10 +19,12 @@ export function BlogCard({ post }: BlogCardProps) {
           <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-medium uppercase tracking-wide">
             {post.category}
           </span>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Calendar className="h-3 w-3" />
-            <time dateTime={post.date}>{format(new Date(post.date), "MMM d, yyyy")}</time>
-          </div>
+          {formattedDate && (
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Calendar className="h-3 w-3" />
+              <time dateTime={post.date}>{formattedDate}</time>
+            </div>
+          )}
         </div>
 
         <h2 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors line-clamp-2">

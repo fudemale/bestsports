@@ -14,6 +14,7 @@ import {
   type BlogCategory,
 } from "@/lib/blog-utils"
 import { SITE_URL } from "@/lib/constants"
+import { safeDate } from "@/lib/utils"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
@@ -172,13 +173,21 @@ export default async function PostPage({ params }: PostPageProps) {
               <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-medium uppercase tracking-wide">
                 {post.category}
               </span>
-              <time dateTime={post.date} className="text-sm text-muted-foreground">
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
+              {(() => {
+                const publishedDate = safeDate(post.date)
+                const formattedDate = publishedDate
+                  ? publishedDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : null
+                return formattedDate ? (
+                  <time dateTime={post.date} className="text-sm text-muted-foreground">
+                    {formattedDate}
+                  </time>
+                ) : null
+              })()}
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{post.title}</h1>

@@ -3,6 +3,7 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import type { BlogPost, BlogCategory } from "@/lib/blog-types"
+import { safeDate } from "@/lib/utils"
 
 export type { BlogPost, BlogCategory }
 
@@ -27,7 +28,7 @@ export function getAllPosts(): BlogPost[] {
           slug: file.replace(/\.(md|mdx)$/, ""),
           title: data.title || "",
           description: data.description || "",
-          date: data.date || "",
+          date: data.publishedAt || data.date || "",
           author: data.author || "Best Sports IPTV",
           category: data.category || category,
           tags: data.tags || [],
@@ -38,7 +39,12 @@ export function getAllPosts(): BlogPost[] {
     })
   })
 
-  return allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  // Safe sorting with fallback for invalid dates
+  return allPosts.sort((a, b) => {
+    const dateA = safeDate(a.date)?.getTime() ?? 0
+    const dateB = safeDate(b.date)?.getTime() ?? 0
+    return dateB - dateA
+  })
 }
 
 export function getPostsByCategory(category: BlogCategory, posts?: BlogPost[]): BlogPost[] {
@@ -66,7 +72,7 @@ export function getPostBySlug(category: BlogCategory, slug: string): BlogPost | 
     slug,
     title: data.title || "",
     description: data.description || "",
-    date: data.date || "",
+    date: data.publishedAt || data.date || "",
     author: data.author || "Best Sports IPTV",
     category: data.category || category,
     tags: data.tags || [],

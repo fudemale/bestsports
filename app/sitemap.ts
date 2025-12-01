@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { SITE_URL } from "@/lib/constants"
 import { getAllPosts, getAllCategories } from "@/lib/blog-utils"
+import { safeDate } from "@/lib/utils"
 
 const routes = [
   "",
@@ -42,12 +43,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Add blog post pages
   const posts = getAllPosts()
-  const postEntries = posts.map((post) => ({
-    url: `${SITE_URL}/blog/${post.category}/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
+  const postEntries = posts.map((post) => {
+    const lastModified = safeDate(post.date) || new Date() // Fallback to current date if invalid
+    return {
+      url: `${SITE_URL}/blog/${post.category}/${post.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }
+  })
 
   const pdfEntry = {
     url: "https://bestsportsiptv.com/setup/firestick-setup-guide.pdf",
