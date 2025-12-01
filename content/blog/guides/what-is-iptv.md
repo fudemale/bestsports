@@ -1,11 +1,25 @@
 ---
 title: "What is IPTV? Complete Guide to Internet Protocol Television"
-description: "Learn what IPTV is, how it works, and why it's becoming the preferred way to watch TV. Understand IPTV subscriptions, streaming technology, and device compatibility."
-date: "2025-01-15"
-author: "Best Sports IPTV"
+slug: "what-is-iptv"
 category: "guides"
-tags: ["IPTV", "Streaming", "TV Technology", "Internet TV"]
+targetKeyword: "what is iptv"
+secondaryKeywords:
+  - "iptv streaming"
+  - "internet protocol television"
+  - "iptv technology"
+  - "iptv subscription"
+searchIntent: "informational"
+description: "Learn what IPTV is, how it works, and why it's becoming the preferred way to watch TV. Understand IPTV subscriptions, streaming technology, and device compatibility."
+readingTimeMinutes: 6
+publishedAt: "2025-11-01"
+updatedAt: "2025-11-01"
+author: "Best Sports IPTV"
+countryTarget: "Global"
+canonicalUrl: ""
+featured: false
 ogImage: "/blog-images/what-is-iptv.jpg"
+relatedSlugs: []
+tags: ["IPTV", "Streaming", "TV Technology", "Internet TV"]
 ---
 
 # What is IPTV? Complete Guide to Internet Protocol Television

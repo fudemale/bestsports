@@ -1,11 +1,26 @@
 ---
 title: "How to Install IPTV on FireStick: Step-by-Step Tutorial 2025"
-description: "Complete guide to installing IPTV apps on Amazon FireStick. Learn how to use Downloader app, enter app codes, and set up VWatch Smart, Pro, or Q apps."
-date: "2025-01-20"
-author: "Best Sports IPTV"
+slug: "how-to-install-iptv-on-firestick"
 category: "tutorials"
-tags: ["FireStick", "IPTV Setup", "Installation", "Tutorial"]
+targetKeyword: "how to install iptv on firestick"
+secondaryKeywords:
+  - "firestick iptv setup"
+  - "iptv installation firestick"
+  - "firestick iptv tutorial"
+  - "install iptv app firestick"
+searchIntent: "informational"
+description: "Complete guide to installing IPTV apps on Amazon FireStick. Learn how to use Downloader app, enter app codes, and set up VWatch Smart, Pro, or Q apps."
+readingTimeMinutes: 8
+publishedAt: "2025-11-01"
+updatedAt: "2025-11-01"
+author: "Best Sports IPTV"
+countryTarget: "Global"
+canonicalUrl: ""
+featured: false
 ogImage: "/blog-images/firestick-install.jpg"
+relatedSlugs:
+  - "what-is-iptv"
+tags: ["FireStick", "IPTV Setup", "Installation", "Tutorial"]
 ---
 
 # How to Install IPTV on FireStick: Step-by-Step Tutorial 2025
