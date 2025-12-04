@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import Image from "next/image"
 import { BlogBreadcrumbs } from "@/components/blog/blog-breadcrumbs"
 import { BlogTOC } from "@/components/blog/blog-toc"
 import { BlogAuthorBox } from "@/components/blog/blog-author-box"
 import { BlogRelatedPosts } from "@/components/blog/blog-related-posts"
 import { MarkdownRenderer } from "@/components/blog/markdown-renderer"
 import { BlogTag } from "@/components/blog/blog-tag"
+import { BlogFaqSection } from "@/components/blog/blog-faq-section"
 import {
   getPostBySlug,
   getRelatedPosts,
@@ -167,6 +169,23 @@ export default async function PostPage({ params }: PostPageProps) {
             categoryDisplayName={getCategoryDisplayName(post.category)}
           />
 
+          {/* Hero Image */}
+          {post.ogImage && post.ogImage !== "" && (
+            <div className="mb-8 -mx-4 md:-mx-6">
+              <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(0,255,255,0.15)]">
+                <Image
+                  src={post.ogImage.startsWith("http") ? post.ogImage : post.ogImage}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </div>
+            </div>
+          )}
+
           {/* Article Header */}
           <header className="mb-8">
             <div className="flex items-center gap-3 mb-4">
@@ -217,6 +236,9 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="mt-12">
             <BlogAuthorBox author={post.author} date={post.date} />
           </div>
+
+          {/* FAQ Section */}
+          <BlogFaqSection content={post.content} />
 
           {/* Navigation */}
           <nav className="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">

@@ -1,4 +1,8 @@
+"use client"
+
 import Link from "next/link"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { HelpCircle } from "lucide-react"
 
 interface MarkdownRendererProps {
   content: string
@@ -16,6 +20,10 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
     let codeBlockContent: string[] = []
     let listItems: string[] = []
     let inList = false
+    let inFaqSection = false
+    let faqItems: Array<{ question: string; answer: string }> = []
+    let currentFaqQuestion: string | null = null
+    let currentFaqAnswer: string[] = []
 
     const flushParagraph = () => {
       if (currentParagraph.length > 0) {
@@ -58,8 +66,104 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
       }
     }
 
+    const flushFaq = () => {
+      if (currentFaqQuestion && currentFaqAnswer.length > 0) {
+        faqItems.push({
+          question: currentFaqQuestion,
+          answer: currentFaqAnswer.join(" ").trim(),
+        })
+        currentFaqQuestion = null
+        currentFaqAnswer = []
+      }
+    }
+
+    const renderFaqSection = () => {
+      if (faqItems.length === 0) return null
+
+      return (
+        <div key="faq-section" className="my-12 py-12 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none rounded-2xl"></div>
+          <div className="relative">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/50 border border-border mb-4">
+                <HelpCircle className="h-4 w-4 text-primary" />
+                <span className="text-xs uppercase tracking-wide text-muted-foreground">FAQ</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+                Frequently Asked Questions
+              </h2>
+            </div>
+            <div className="max-w-3xl mx-auto">
+              <Accordion type="single" collapsible className="space-y-4">
+                {faqItems.map((item, index) => (
+                  <AccordionItem
+                    key={index}
+                    value={`item-${index}`}
+                    className="glass-card border border-white/10 rounded-xl px-6 bg-card/30"
+                  >
+                    <AccordionTrigger className="text-left font-semibold hover:no-underline py-6 text-foreground">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground leading-relaxed pb-6">
+                      {processInlineMarkdown(item.answer)}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
     lines.forEach((line, index) => {
       const trimmed = line.trim()
+
+      // Detect FAQ section start
+      if (trimmed.match(/^##\s+(Frequently asked questions|FAQ)/i)) {
+        flushParagraph()
+        flushList()
+        flushCodeBlock()
+        if (!inFaqSection) {
+          inFaqSection = true
+          faqItems = []
+        }
+        // Render the FAQ heading but don't add it to elements yet
+        return
+      }
+
+      // Process FAQ items
+      if (inFaqSection) {
+        // Detect end of FAQ section (next major heading)
+        if (trimmed.startsWith("## ") && !trimmed.match(/frequently asked questions|faq/i)) {
+          flushFaq()
+          inFaqSection = false
+          elements.push(renderFaqSection())
+          faqItems = []
+          // Continue processing the new heading
+        } else {
+          // Parse Q: and A: patterns
+          // Match **Q: question** or Q: question (with or without bold)
+          const qMatch = trimmed.match(/^\*\*Q:\s*(.+?)\*\*$/i) || trimmed.match(/^Q:\s*(.+)$/i)
+          // Match A: answer
+          const aMatch = trimmed.match(/^A:\s*(.+)$/i)
+
+          if (qMatch) {
+            flushFaq() // Save previous FAQ item before starting new one
+            currentFaqQuestion = qMatch[1].trim()
+            currentFaqAnswer = []
+          } else if (aMatch && currentFaqQuestion) {
+            // Start of answer
+            currentFaqAnswer.push(aMatch[1].trim())
+          } else if (trimmed && currentFaqQuestion && !trimmed.match(/^Q:/i) && !trimmed.match(/^A:/i)) {
+            // Continue answer on next line (if not empty and not a new Q or A)
+            if (trimmed.length > 0) {
+              currentFaqAnswer.push(trimmed)
+            }
+          }
+          return
+        }
+      }
 
       // Code blocks
       if (trimmed.startsWith("```")) {
@@ -168,6 +272,12 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
     flushParagraph()
     flushList()
     flushCodeBlock()
+    flushFaq()
+
+    // If we're still in FAQ section at the end, render it
+    if (inFaqSection && faqItems.length > 0) {
+      elements.push(renderFaqSection())
+    }
 
     return elements
   }
