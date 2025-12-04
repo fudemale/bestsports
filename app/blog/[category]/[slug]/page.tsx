@@ -170,21 +170,24 @@ export default async function PostPage({ params }: PostPageProps) {
           />
 
           {/* Hero Image */}
-          {post.ogImage && post.ogImage !== "" && (
-            <div className="mb-8 -mx-4 md:-mx-6">
-              <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(0,255,255,0.15)]">
-                <Image
-                  src={post.ogImage.startsWith("http") ? post.ogImage : post.ogImage}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          {(() => {
+            const heroSrc = post.ogImage && post.ogImage.trim().length > 0 ? post.ogImage : "/og-iptv-uk.jpg"
+            return heroSrc ? (
+              <div className="mb-8 -mx-4 md:-mx-6">
+                <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(0,255,255,0.15)]">
+                  <Image
+                    src={heroSrc.startsWith("http") ? heroSrc : heroSrc}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                </div>
               </div>
-            </div>
-          )}
+            ) : null
+          })()}
 
           {/* Article Header */}
           <header className="mb-8">
