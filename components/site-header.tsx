@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Tv, Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
-import { BRAND_NAME, GLOBAL_CTA_URL } from "@/lib/constants"
+import { BRAND_NAME, GLOBAL_CTA_URL, TRIAL_CTA_URL } from "@/lib/constants"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SiteHeader() {
@@ -64,7 +64,7 @@ export function SiteHeader() {
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
             <Button asChild variant="ghost" className="text-foreground hover:text-primary hover:bg-accent">
-              <Link href={GLOBAL_CTA_URL}>Free Test</Link>
+              <Link href={TRIAL_CTA_URL}>Free Test</Link>
             </Button>
             <Button
               asChild
@@ -105,7 +105,7 @@ export function SiteHeader() {
           ))}
           <div className="flex flex-col gap-3 mt-2">
             <Button asChild variant="outline" className="w-full border-border hover:bg-muted bg-transparent">
-              <Link href={GLOBAL_CTA_URL}>Free Test</Link>
+              <Link href={TRIAL_CTA_URL}>Free Test</Link>
             </Button>
             <Button asChild className="w-full bg-primary text-primary-foreground">
               <Link href={GLOBAL_CTA_URL}>Get IPTV</Link>

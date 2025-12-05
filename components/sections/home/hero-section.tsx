@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ShieldCheck, Tv, Clapperboard, Trophy, Globe2 } from "lucide-react"
-import { GLOBAL_CTA_URL } from "@/lib/constants"
+import { GLOBAL_CTA_URL, TRIAL_CTA_URL } from "@/lib/constants"
 
 export function HeroSection() {
   return (
@@ -41,7 +41,7 @@ export function HeroSection() {
             variant="outline"
             className="w-full sm:w-auto border-border hover:bg-muted text-lg h-12 px-8 bg-transparent text-foreground"
           >
-            <Link href={GLOBAL_CTA_URL}>Start Free Test</Link>
+            <Link href={TRIAL_CTA_URL}>Start Free Test</Link>
           </Button>
         </div>
 

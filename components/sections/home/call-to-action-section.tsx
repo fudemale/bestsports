@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { GLOBAL_CTA_URL } from "@/lib/constants"
+import { GLOBAL_CTA_URL, TRIAL_CTA_URL } from "@/lib/constants"
 
 type CallToActionSectionProps = {
   title?: string
@@ -13,8 +13,16 @@ export function CallToActionSection({
   title = "Ready to Start Watching?",
   description = "Join thousands of satisfied customers and experience high-quality IPTV access today.",
   ctaLabel = "View IPTV Plans",
-  ctaUrl = GLOBAL_CTA_URL,
+  ctaUrl,
 }: CallToActionSectionProps) {
+  // Auto-detect trial-related labels and use trial URL
+  const isTrialLabel = ctaLabel?.toLowerCase().includes("free test") || 
+                       ctaLabel?.toLowerCase().includes("free trial") ||
+                       ctaLabel?.toLowerCase().includes("start free") ||
+                       ctaLabel?.toLowerCase().includes("get free test")
+  
+  const finalCtaUrl = ctaUrl || (isTrialLabel ? TRIAL_CTA_URL : GLOBAL_CTA_URL)
+
   return (
     <section className="py-20">
       <div className="container mx-auto px-4 md:px-6">
@@ -28,7 +36,7 @@ export function CallToActionSection({
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-10 shadow-[0_0_25px_rgba(0,225,255,0.4)]"
             >
-              <Link href={ctaUrl}>{ctaLabel}</Link>
+              <Link href={finalCtaUrl}>{ctaLabel}</Link>
             </Button>
           </div>
         </div>
